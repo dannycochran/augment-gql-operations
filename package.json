@@ -1,5 +1,6 @@
 {
   "name": "augment-gql-operations",
+  "description": "This is a small plugin for graphql-codegen to augment all operations with arbitrary graphql.",
   "version": "0.0.1",
   "author": "dannycochran",
   "license": "MIT",
