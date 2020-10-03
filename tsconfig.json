@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "outDir": "./",
+    "skipLibCheck": true,
+    "moduleResolution": "node",
+    "module": "CommonJS",
+    "target": "ES5",
+    "sourceMap": false,
+    "lib": [
+      "es2017",
+      "es2016"
+    ],
+    "noUnusedLocals": false,
+    "esModuleInterop": true,
+    "strict": true,
+    "pretty": true,
+    "preserveWatchOutput": true,
+    "incremental": true
+  },
+  "include": [
+    "index.ts"
+  ],
+  "exclude": ["./node_modules"]
+}
