@@ -55,7 +55,7 @@ const codegen = {
       }
     } catch (err) {
       /* eslint-disable-next-line no-console */
-      console.warn('Failed to parse content for append-to-operatoin.');
+      console.warn(`Failed to parse content for augment-gql-operations: ${err.message}`);
     }
   },
 };
