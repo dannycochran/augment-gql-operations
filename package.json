@@ -2,7 +2,7 @@
   "name": "augment-gql-operations",
   "description": "This is a small plugin for graphql-codegen to augment all operations with arbitrary graphql.",
   "main": "index.js",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "author": "dannycochran",
   "license": "MIT",
   "scripts": {

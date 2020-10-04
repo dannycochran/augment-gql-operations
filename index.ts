@@ -51,13 +51,7 @@ const codegen = {
       console.warn(`"augment-gql-operations" failed: ${err.message}`);
       throw err;
     }
-  },
-
-  validate: (schema: GraphQLSchema, documents: CodegenDocuments[], config?: { content?: string }) => {
-    if (!config?.content) {
-      throw new Error(`You must specify "content" in the configuration for "augment-gql-operations".`);
-    }
-  },
+  }
 };
 
 module.exports = codegen;
