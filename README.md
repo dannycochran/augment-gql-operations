@@ -19,13 +19,12 @@ Here's an example usage specifically with TypeScript output:
 generates:
   ./src/graphql/typesAndHooks.tsx:
     plugins:
+      - 'augment-gql-operations':
+        content: 'requestDetails { debugLink }'
       - 'typescript'
       - 'typescript-operations'
-      - 'named-operations-object'
       - 'typescript-react-apollo'
       - 'fragment-matcher'
-      - 'augment-gql-operations':
-          content: 'requestDetails { debugLink }'
 ```
 
 This will append the following graphql to all your queries, mutations, and subscriptions in `./src/graphql/typesAndHooks.tsx` (note it will not modify your original query files or documents):
