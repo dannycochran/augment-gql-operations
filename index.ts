@@ -8,11 +8,7 @@ type CodegenDocuments = {
 };
 
 const codegen = {
-  plugin: (schema: GraphQLSchema, documents: CodegenDocuments[], config?: { content?: string }) => {
-    if (!config?.content) {
-      return;
-    }
-
+  plugin: (schema: GraphQLSchema, documents: CodegenDocuments[], config: { content: string }) => {
     try {
       const ContentDocument = gql`
         query {
@@ -28,18 +24,15 @@ const codegen = {
           const { definitions } = codegenDocument.document;
           definitions?.forEach(definition => {
             if ('operation' in definition) {
-              const existingSelectionsMap = definition.selectionSet.selections.reduce<Map<string, SelectionNode>>(
-                (agg, selection) => {
-                  if ('name' in selection) {
-                    agg.set(selection.name.value, selection);
-                  }
-                  return agg;
-                },
-                new Map(),
-              );
+              const existingSelections = definition.selectionSet.selections.reduce<Set<string>>((agg, selection) => {
+                if ('name' in selection) {
+                  agg.add(selection.name.value);
+                }
+                return agg;
+              }, new Set());
               const newSelections = selectionSet.selections.reduce<SelectionNode[]>(
                 (agg, selection) => {
-                  if ('name' in selection && !existingSelectionsMap.has(selection.name.value)) {
+                  if ('name' in selection && !existingSelections.has(selection.name.value)) {
                     agg.push(selection);
                   }
                   return agg;
@@ -55,7 +48,14 @@ const codegen = {
       }
     } catch (err) {
       /* eslint-disable-next-line no-console */
-      console.warn(`Failed to parse content for augment-gql-operations: ${err.message}`);
+      console.warn(`"augment-gql-operations" failed: ${err.message}`);
+      throw err;
+    }
+  },
+
+  validate: (schema: GraphQLSchema, documents: CodegenDocuments[], config?: { content?: string }) => {
+    if (!config?.content) {
+      throw new Error(`You must specify "content" in the configuration for "augment-gql-operations".`);
     }
   },
 };
